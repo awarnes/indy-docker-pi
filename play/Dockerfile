@@ -17,7 +17,10 @@ COPY /public /usr/src/app/public
 # install and cache app dependencies
 COPY package-lock.json /usr/src/app/package-lock.json
 COPY package.json /usr/src/app/package.json
+
 RUN npm install
+
+EXPOSE 3000
 
 # start app
 CMD ["npm", "start"]

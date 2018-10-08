@@ -1,0 +1,34 @@
+version: "3"
+services:
+  ngrok:
+    build: ./ngrok
+    environment:
+      - NGROK_AUTH_TOKEN=$NGROK_AUTH_TOKEN
+    volumes:
+      - "./ngrok/ngrok.yml:/root/ngrok.yml"
+      - "./ngrok/entrypoint.sh:/entrypoint.sh"
+    ports:
+      - "4040:4040"
+    entrypoint:
+      - "/entrypoint.sh"
+  nginx:
+    image: nginx:mainline-alpine
+    volumes:
+      - "./nginx/nginx.conf:/etc/nginx/nginx.conf"
+    ports:
+      - "80:80"
+    depends_on:
+      - play
+    # restart: always
+  play:
+    build: ./play
+    volumes:
+      - "./play/src:/usr/src/app/src"
+      - "./play/public:/usr/src/app/public"
+      - "./play/package-lock.json:/usr/src/app/package-lock.json"
+      - "./play/package.json:/usr/src/app/package.json"
+    expose:
+      - "3000"
+    # depends_on:
+    #   - nginx
+    #   -
