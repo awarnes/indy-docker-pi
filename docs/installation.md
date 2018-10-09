@@ -4,6 +4,8 @@ Clone the repo, make sure the dependencies below are installed and start everyth
 
 The system is setup to run on either a raspberry pi or a mac. If other systems are required please put in a pull request!
 
+Add the environment variable `$NGROK_AUTH_TOKEN` to access your account with ngrok.
+
 Requirements:
   - docker
     - [mac](https://docs.docker.com/v17.12/docker-for-mac/install/)
